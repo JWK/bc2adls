@@ -152,6 +152,11 @@ codeunit 82574 "ADLSE External Events"
         MyBusinessOnRefreshOptions(ADLSESetup.SystemId, ADLSESetup."Storage Type", Url, WebClientUrl);
     end;
 
+    internal procedure OnAfterResetSelectedBulk(TableList: List of [Guid]; TableIdList: List of [Integer])
+    begin
+        MyBusinessEventOnAfterResetSelectedBulk(TableList, TableIdList);
+    end;
+
     local procedure GetSetup()
     var
         ADLSESetup: Record "ADLSE Setup";
@@ -166,75 +171,80 @@ codeunit 82574 "ADLSE External Events"
         Resource := ADLSESetup.Container;
     end;
 
-    [ExternalBusinessEvent('ExportEntityEnded', 'Export entity ended', 'The export of the entity was registered as ended.', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('ExportEntityEnded', 'Export entity ended', 'The export of the entity was registered as ended.')]
     local procedure ExportEntityEnded(RunId: Integer; Started: DateTime; Ended: DateTime; State: Enum "ADLSE Run State"; StorageType: Text[250]; Instance: Text[250]; Resource: Text[250]; Entity: Text[250])
     begin
     end;
 
     [Obsolete('Replaced with the ExportEntityEnded External Business Event', '1.5.0.0')]
-    [ExternalBusinessEvent('ExportOfEntityEnded', '[OBSOLETE] Entity export ended', '[OBSOLETE] The export of the entity was registered as ended.', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('ExportOfEntityEnded', '[OBSOLETE] Entity export ended', '[OBSOLETE] The export of the entity was registered as ended.')]
     local procedure TableExportRunEnded(RunId: Integer; State: Enum "ADLSE Run State"; Container: Text[250]; EntityName: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('EnableFieldChanged', 'Field enabled changed', 'The field enabled is changed on the field table', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('EnableFieldChanged', 'Field enabled changed', 'The field enabled is changed on the field table')]
     local procedure MyBusinessEventEnableFieldChanged(SystemId: Guid; TableId: Integer; FieldId: Integer; Enabled: Boolean; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('EnableTableChanged', 'Table enabled changed', 'The table enabled is changed on the table', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('EnableTableChanged', 'Table enabled changed', 'The table enabled is changed on the table')]
     local procedure MyBusinessEventEnableTableChanged(SystemId: Guid; TableId: Integer; Enabled: Boolean; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnAfterResetSelected', 'On After Reset is activated', 'When the reset action is done.', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnAfterResetSelected', 'On After Reset is activated', 'When the reset action is done.')]
     local procedure MyBusinessEventOnAfterResetSelected(SystemId: Guid; TableId: Integer)
     begin
     end;
 
-    [ExternalBusinessEvent('OnAddTable', 'On adding table', 'When an table is added in the setup', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnAddTable', 'On adding table', 'When an table is added in the setup')]
     local procedure MyBusinessEventOnAddTable(SystemId: Guid; TableId: Integer; Enabled: Boolean; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnDeleteTable', 'On deleting table', 'When an table is deleted in the setup', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnDeleteTable', 'On deleting table', 'When an table is deleted in the setup')]
     local procedure MyBusinessEventOnDeleteTable(SystemId: Guid; TableId: Integer; Enabled: Boolean; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnExportSchema', 'Export schema', 'When the schema is exported', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnExportSchema', 'Export schema', 'When the schema is exported')]
     local procedure MyBusinessOnExportSchema(SystemId: Guid; "Storage Type": Enum "ADLSE Storage Type"; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnClearSchemaExportedOn', 'Clear schema exported on', 'When the field schema exported on is cleared', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnClearSchemaExportedOn', 'Clear schema exported on', 'When the field schema exported on is cleared')]
     local procedure MyBusinessOnClearSchemaExportedOn(SystemId: Guid; "Storage Type": Enum "ADLSE Storage Type"; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnExport', 'Export data', 'When the data is exported', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnExport', 'Export data', 'When the data is exported')]
     local procedure MyBusinessOnExport(SystemId: Guid; "Storage Type": Enum "ADLSE Storage Type"; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
     [Obsolete('Replaced with the OnExportFinishedv2 External Business Event', '24.0')]
-    [ExternalBusinessEvent('OnExportFinished', 'Export is finished for one table', 'When the export is finished for one table', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnExportFinished', 'Export is finished for one table', 'When the export is finished for one table')]
     local procedure MyBusinessOnExportFinished(SystemId: Guid; "Storage Type": Enum "ADLSE Storage Type"; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnExportFinishedv2', 'Export is finished for one table v2', 'When the export is finished for one table', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnExportFinishedv2', 'Export is finished for one table v2', 'When the export is finished for one table')]
     local procedure MyBusinessOnExportFinishedv2(SystemId: Guid; "Storage Type": Enum "ADLSE Storage Type"; TableId: Integer; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnAllExportIsFinished', 'Export is finished of all tables', 'When the export is finished of all tables', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnAllExportIsFinished', 'Export is finished of all tables', 'When the export is finished of all tables')]
     local procedure MyBusinessOnAllExportIsFinished(SystemId: Guid; "Storage Type": Enum "ADLSE Storage Type"; Url: Text[250]; WebClientUrl: Text[250])
     begin
     end;
 
-    [ExternalBusinessEvent('OnRefreshOptions', 'Refresh Options', 'When the options are refreshed', EventCategory::ADLSE)]
+    [ExternalBusinessEvent('OnRefreshOptions', 'Refresh Options', 'When the options are refreshed')]
     local procedure MyBusinessOnRefreshOptions(SystemId: Guid; "Storage Type": Enum "ADLSE Storage Type"; Url: Text[250]; WebClientUrl: Text[250])
+    begin
+    end;
+
+    [ExternalBusinessEvent('OnAfterResetSelectedBulk', 'Multiple tables reset completed', 'When multiple tables are reset in bulk')]
+    local procedure MyBusinessEventOnAfterResetSelectedBulk(SystemIds: List of [Guid]; TableIds: List of [Integer])
     begin
     end;
 
